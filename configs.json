@@ -1,0 +1,9 @@
+{
+    "readme": {
+        "input_file": "Readme.md",
+        "deckname": "Readme",
+        "outputname": "readme.apkg", 
+        "model_id" : 1477896232,
+        "deck_id" : 2044944474
+    }
+}
