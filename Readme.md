@@ -20,7 +20,7 @@ You can even import ![images](res/example_image.png)
 1. Install the required dependecies, listed below. 
 2. Add a new entry to the `configs.json` for the desired Markdown file you want to convert. Some important notes:
     - `model_id` and `deck_id` **need to be unique** for every deck you create! Please [read the docs of `genanki`](https://github.com/kerrickstaley/genanki). **TL;DR** create **two new, distinct ids** in the python console by running `import random; random.randrange(1 << 30, 1 << 31)`.
-3. Run `./python3 convert.py configEntryName`. It will handle everything on its own. But keep in mind, potential image includings like `![img alt](/res/image/source.png)` must be relative to `./convert.py` or absolute.
+3. Run `./python3 convert.py configEntryName`. It will handle everything on its own.
     
 ## Example
 
@@ -49,6 +49,7 @@ The respective call is `python3 convert.py readme` and results in creating the `
 # Dependencies
 
     # Tested with `Python 3.6.9` on `Ubuntu 18.04` and `Python 3.7.3` on `Debian Buster`.
+
     sudo apt update && sudo apt install -y pandoc
 
     pip3 install --user beautifulsoup4 genanki pypandoc
