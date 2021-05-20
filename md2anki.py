@@ -57,7 +57,7 @@ with open(tempfile.name, 'r') as fh:
             templates=[
                 {
                 'name': 'Card 1',
-                'qfmt': '{{Question}}',
+                'qfmt': '<h1>{{Question}}</h1>',
                 'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}',
                 },
             ],css=css)
