@@ -9,7 +9,9 @@ import json
 import pypandoc
 import tempfile
 
-assert len(sys.argv) > 0, "Missing input parameter"
+if len(sys.argv) < 2:
+    print ('Usage: ./md2anki.py configEntryName')
+    exit(1)
 
 config_entry = sys.argv[1]
 
