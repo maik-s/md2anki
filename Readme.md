@@ -46,10 +46,15 @@ An example entry for `configs.json` looks like:
 
 The respective call is `python3 md2anki.py readme` and results in creating the `readme.apkg` file in the current working directory.
 
-# Dependencies
+# Dependencies & Installation
 
-    # Tested with `Python 3.6.9` on `Ubuntu 18.04` and `Python 3.7.3` on `Debian Buster`.
+```bash
+# Tested on Ubuntu 20.04 with `Python 3.8.5`
 
-    sudo apt update && sudo apt install -y pandoc
+sudo apt update && sudo apt install -y pandoc python3-pip
 
-    pip3 install --user beautifulsoup4 genanki pypandoc
+pip3 install --user beautifulsoup4 genanki pypandoc
+
+git clone https://github.com/maik-s/md2anki.git
+
+```
