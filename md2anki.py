@@ -17,6 +17,10 @@ config_entry = sys.argv[1]
 
 input_file, deckname, outputname, model_id, deck_id = None, None, None, None, None
 
+pandoc_args = ["-s", "--highlight-style", "tango"]
+css_files = ["default.css"]
+css = ""
+
 with open(pathjoin(dirname(sys.argv[0]), 'configs.json')) as config_file:
     configs = json.load(config_file)[config_entry]
     input_file = pathjoin(dirname(sys.argv[0]),configs["input_file"])
@@ -24,9 +28,16 @@ with open(pathjoin(dirname(sys.argv[0]), 'configs.json')) as config_file:
     outputname = configs["outputname"]
     model_id = configs["model_id"]
     deck_id = configs["deck_id"]
+    if "pandoc_args" in configs:
+        pandoc_args = configs["pandoc_args"]
+    if "css" in configs:
+        css_files = configs["css"]
+    for css_file in css_files:
+        with open (css_file, "r") as fh:
+            css += fh.read()
 
 tempfile = tempfile.NamedTemporaryFile()
-pypandoc.convert_file(input_file, to="html5", extra_args=["-s", "--highlight-style", "tango"], outputfile=tempfile.name)
+pypandoc.convert_file(input_file, to="html5", extra_args=pandoc_args, outputfile=tempfile.name)
 
 class MyNote(genanki.Note):
   @property
@@ -37,15 +48,6 @@ filedirname = dirname(input_file)
 
 with open(tempfile.name, 'r') as fh:
     soup = BeautifulSoup(fh, 'html.parser')
-    css = """.card {
-                font-family: arial;
-                font-size: 20px;
-                color: black;
-                text-align: left;
-            }
-            .figure > .caption {display:none;} /* do not display figure captions*/
-            figcaption { display: none; }
-            """
     styles = soup.find_all("style")
     for style in styles:
         css += style.string

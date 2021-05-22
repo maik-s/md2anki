@@ -1,0 +1,9 @@
+.card {
+    font-family: arial;
+    font-size: 20px;
+    color: black;
+    text-align: left;
+}
+.figure > .caption {display:none;} /* do not display figure captions*/
+
+figcaption { display: none; }

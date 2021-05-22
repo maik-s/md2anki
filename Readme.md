@@ -22,9 +22,10 @@ You can even import ![images](res/example_image.png)
     - `model_id` and `deck_id` **need to be unique** for every deck you create! Please [read the docs of `genanki`](https://github.com/kerrickstaley/genanki). **TL;DR** create **two new, distinct ids** in the python console by running `import random; random.randrange(1 << 30, 1 << 31)`.
 3. Run `python3 md2anki.py configEntryName`. It will handle everything on its own.
     
-## Example
+# Configuration
 
-An example entry for `configs.json` looks like:
+Configuration options for each Anki decks are stored in `configs.json`.
+An example entry looks like:
 
 ```json
 {
@@ -38,11 +39,18 @@ An example entry for `configs.json` looks like:
 }
 ```
 
+- `readme`: The name for the configuration entry, which is passed to `md2anki`
 - `input_file`: Path to the Markdown file, relative to `md2anki.py` or absolute.
 - `deckname`: Name of the deck, how it should be named within Anki.
 - `outputname`: Filename of the resulting anki package (in `cwd`).
 - `model_id`: Unique id of the created model.
 - `deck_id`: Unique id of the created model.
+
+## Optional configuration parameters
+
+- `css`: An array of `.css` files, that should be included into the cards. Path must be relative to `./md2anki.py` or absolute. Defaults to `["default.css"]`
+- `pandoc_args`: An array of custom paramters for pandoc. Defaults to `["-s", "--highlight-style", "tango"]`
+
 
 The respective call is `python3 md2anki.py readme` and results in creating the `readme.apkg` file in the current working directory.
 
