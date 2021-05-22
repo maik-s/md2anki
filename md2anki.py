@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from os.path import basename, dirname, join as pathjoin
+from os.path import basename, dirname, join as pathjoin, isabs
 from os import remove
 import genanki
 from bs4 import BeautifulSoup
@@ -33,6 +33,8 @@ with open(pathjoin(dirname(sys.argv[0]), 'configs.json')) as config_file:
     if "css" in configs:
         css_files = configs["css"]
     for css_file in css_files:
+        if not isabs(css_file):
+            css_file = pathjoin(dirname(sys.argv[0]), css_file)
         with open (css_file, "r") as fh:
             css += fh.read()
 
