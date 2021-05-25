@@ -66,3 +66,8 @@ pip3 install --user beautifulsoup4 genanki pypandoc
 git clone https://github.com/maik-s/md2anki.git
 
 ```
+
+# Docker
+
+This repository includes a `Dockerfile`. You build the image from the directory with `docker build . -t md2anki`.
+Then run `docker run -it $(pwd):/code md2anki configentry $(pwd)/configs.json` from the `cwd`, where you Markdown file **and** the `configs.json` is stored.
