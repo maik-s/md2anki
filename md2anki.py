@@ -39,7 +39,7 @@ with open(pathjoin(relative_path, path_to_config)) as config_file:
         css_files = configs["css"]
     for css_file in css_files:
         if not isabs(css_file):
-            css_file = pathjoin(dirname(sys.argv[0]), css_file)
+            css_file = pathjoin(relative_path, css_file)
         with open (css_file, "r") as fh:
             css += fh.read()
 
