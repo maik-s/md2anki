@@ -4,10 +4,10 @@ RUN apt update && apt install -y pandoc
 
 RUN pip3 install --user beautifulsoup4 genanki pypandoc
 
-WORKDIR /code
+COPY md2anki.py /code/md2anki/md2anki.py
+COPY configs.json /code/md2anki/configs.json
+COPY default.css /code/md2anki/default.css
 
-COPY md2anki.py /code/md2anki
-COPY configs.json /code/md2anki
-COPY default.css /code/md2anki
+WORKDIR /data
 
-ENTRYPOINT ["python3", "md2anki/md2anki.py"]
+ENTRYPOINT ["python3", "/code/md2anki/md2anki.py"]
