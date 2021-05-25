@@ -10,10 +10,13 @@ import pypandoc
 import tempfile
 
 if len(sys.argv) < 2:
-    print ('Usage: ./md2anki.py configEntryName')
+    print ('Usage: ./md2anki.py configEntryName [path to config]')
     exit(1)
 
 config_entry = sys.argv[1]
+path_to_config = "configs.json"
+if len(sys.argv) > 2:
+    path_to_config = sys.argv[2]
 
 input_file, deckname, outputname, model_id, deck_id = None, None, None, None, None
 
@@ -21,7 +24,7 @@ pandoc_args = ["-s", "--highlight-style", "tango"]
 css_files = ["default.css"]
 css = ""
 
-with open(pathjoin(dirname(sys.argv[0]), 'configs.json')) as config_file:
+with open(pathjoin(dirname(sys.argv[0]), path_to_config)) as config_file:
     configs = json.load(config_file)[config_entry]
     input_file = pathjoin(dirname(sys.argv[0]),configs["input_file"])
     deckname = configs["deckname"]
