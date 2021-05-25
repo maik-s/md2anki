@@ -15,8 +15,10 @@ if len(sys.argv) < 2:
 
 config_entry = sys.argv[1]
 path_to_config = "configs.json"
+relative_path = dirname(sys.argv[0])
 if len(sys.argv) > 2:
-    path_to_config = sys.argv[2]
+    relative_path = dirname(sys.argv[2])
+    path_to_config = basename(sys.argv[2])
 
 input_file, deckname, outputname, model_id, deck_id = None, None, None, None, None
 
@@ -24,9 +26,9 @@ pandoc_args = ["-s", "--highlight-style", "tango"]
 css_files = ["default.css"]
 css = ""
 
-with open(pathjoin(dirname(sys.argv[0]), path_to_config)) as config_file:
+with open(pathjoin(dirname(relative_path), path_to_config)) as config_file:
     configs = json.load(config_file)[config_entry]
-    input_file = pathjoin(dirname(sys.argv[0]),configs["input_file"])
+    input_file = pathjoin(dirname(relative_path),configs["input_file"])
     deckname = configs["deckname"]
     outputname = configs["outputname"]
     model_id = configs["model_id"]
