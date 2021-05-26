@@ -76,12 +76,12 @@ with open(tempfile.name, 'r') as fh:
     my_package.media_files = []
     body = soup.find("body")
     fields = [None, None]
-    for tag in body:
+    for tag in body.children:
         if tag.name == "h1":
             if None not in fields:
                 my_note = MyNote(model=my_model,fields=[str(fields[0]), str(fields[1])])
                 my_deck.add_note(my_note)
-            fields[0] = tag.string
+            fields[0] = tag.decode_contents()
             fields[1] = None
         else:
             if not fields[1]:
