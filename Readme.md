@@ -61,9 +61,9 @@ The respective call is `python3 md2anki.py readme` and results in creating the `
 
 sudo apt update && sudo apt install -y pandoc python3-pip
 
-pip3 install --user beautifulsoup4 genanki pypandoc
-
 git clone https://github.com/maik-s/md2anki.git
+
+pip3 install --user -r requirements.txt
 ```
 
 # Docker
