@@ -62,7 +62,7 @@ The respective call is `python3 md2anki.py readme` and results in creating the `
 sudo apt update && sudo apt install -y pandoc python3-pip
 
 git clone https://github.com/maik-s/md2anki.git
-
+cd md2anki
 pip3 install --user -r requirements.txt
 ```
 
