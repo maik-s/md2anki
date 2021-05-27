@@ -37,9 +37,11 @@ with open(pathjoin(relative_path, path_to_config)) as config_file:
         pandoc_args = configs["pandoc_args"]
     if "css" in configs:
         css_files = configs["css"]
+        pandoc_args.append("--css")
     for css_file in css_files:
         if not isabs(css_file):
             css_file = pathjoin(relative_path, css_file)
+        pandoc_args.append(css_file)
         with open (css_file, "r") as fh:
             css += fh.read()
 
