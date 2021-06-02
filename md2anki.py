@@ -12,7 +12,7 @@ import tempfile
 if len(sys.argv) < 2:
     print ('Usage: ./md2anki.py configEntryName [path to config]')
     exit(1)
-
+print ("[i] Using pandoc version %s" % pypandoc.get_pandoc_version())
 config_entry = sys.argv[1]
 path_to_config = "configs.json"
 relative_path = dirname(sys.argv[0])
