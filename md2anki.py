@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from os.path import basename, dirname, join as pathjoin, isabs
+from os.path import basename, dirname, join as pathjoin, isabs, realpath
 from os import remove
 import genanki
 from bs4 import BeautifulSoup
@@ -16,6 +16,8 @@ print ("[i] Using pandoc version %s" % pypandoc.get_pandoc_version())
 config_entry = sys.argv[1]
 path_to_config = "configs.json"
 relative_path = dirname(sys.argv[0])
+this_path = dirname(realpath(__file__))
+
 if len(sys.argv) > 2:
     relative_path = dirname(sys.argv[2])
     path_to_config = basename(sys.argv[2])
@@ -28,7 +30,7 @@ css = ""
 
 with open(pathjoin(relative_path, path_to_config)) as config_file:
     configs = json.load(config_file)[config_entry]
-    input_file = pathjoin(relative_path,configs["input_file"])
+    input_file = pathjoin(relative_path, configs["input_file"])
     deckname = configs["deckname"]
     outputname = configs["outputname"]
     model_id = configs["model_id"]
@@ -38,12 +40,12 @@ with open(pathjoin(relative_path, path_to_config)) as config_file:
     if "css" in configs:
         css_files = configs["css"]
         pandoc_args.append("--css")
-    for css_file in css_files:
-        if not isabs(css_file):
-            css_file = pathjoin(relative_path, css_file)
-        pandoc_args.append(css_file)
-        with open (css_file, "r") as fh:
-            css += fh.read()
+        for css_file in css_files:
+            if not isabs(css_file):
+                css_file = pathjoin(this_path, css_file)
+            pandoc_args.append(css_file)
+            with open (css_file, "r") as fh:
+                css += fh.read()
 
 tempfile = tempfile.NamedTemporaryFile()
 pypandoc.convert_file(input_file, to="html5", extra_args=pandoc_args, outputfile=tempfile.name)
